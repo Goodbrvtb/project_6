@@ -1,8 +1,10 @@
 import { useState, useCallback } from "react";
-import "./App.css";
+import "./App.scss";
 import SearchInput from "./components/searchInput";
 import ItemList from "./components/itemList";
 import CounterButton from "./components/counterButton";
+import Toggle from "./components/toggle";
+import { ThemeContext, themes } from "./contexts/themeContext";
 const USERARRAY = [
   { id: 1, fullName: "Иван Иванов Иванович" },
   { id: 2, fullName: "Сергей Петров Петрович" },
@@ -200,10 +202,24 @@ function App() {
   }, []);
   console.log("render App");
   return (
-    <div>
+    <div className="main">
       <div>
-        <h1>{countApp}</h1>
-        <CounterButton countChange={handleCountChange} count={countApp} />
+        <ThemeContext.Consumer>
+          {({ theme, setTheme }) => (
+            <Toggle
+              onChange={() => {
+                if (theme === themes.light) setTheme(themes.dark);
+                if (theme === themes.dark) setTheme(themes.light);
+              }}
+              value={theme === themes.dark}
+            />
+          )}
+        </ThemeContext.Consumer>
+        <div className="counter">
+          {" "}
+          <h1>{countApp}</h1>
+          <CounterButton countChange={handleCountChange} count={countApp} />
+        </div>
       </div>
       <SearchInput onSearchChange={handleSearchChange} text={searchText} />
       <ItemList userArray={USERARRAY} searchText={searchText} />

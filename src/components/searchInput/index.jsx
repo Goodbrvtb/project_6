@@ -6,7 +6,12 @@ const SearchInput = ({ onSearchChange, searchText }) => {
     onSearchChange(newText);
   };
   return (
-    <input value={searchText} onChange={handleChange} placeholder="Поиск..." />
+    <input
+      className="input"
+      value={searchText}
+      onChange={handleChange}
+      placeholder="Поиск..."
+    />
   );
 };
 
