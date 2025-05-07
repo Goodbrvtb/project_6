@@ -11,7 +11,7 @@ const ItemList = ({ userArray, searchText }) => {
   console.log("render ItemList");
 
   return (
-    <div>
+    <div className="list">
       <ol>
         {searchUser.map((user) => (
           <li key={user.id}>{user.fullName}</li>
